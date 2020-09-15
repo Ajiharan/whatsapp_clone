@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Chat from "./chat/Chat";
 import Sidebar from "./side/Sidebar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import { useStateValue } from "./StateProvider";
+import Login from "./user/Login";
 function App() {
-  return (
+  const [{ user }, dispatch] = useStateValue();
+  return user ? (
     <div className="app">
       <div className="app__body">
         <Router>
@@ -20,6 +22,10 @@ function App() {
           </Switch>
         </Router>
       </div>
+    </div>
+  ) : (
+    <div className="app">
+      <Login />
     </div>
   );
 }
